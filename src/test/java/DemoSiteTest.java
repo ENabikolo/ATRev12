@@ -21,8 +21,8 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class DemoSiteTest {
 
-//    private static XSSFSheet ExcelWSheet;
-//    private static XSSFWorkbook ExcelWBook;
+    private static XSSFSheet ExcelWSheet;
+    private static XSSFWorkbook ExcelWBook;
 //    private static XSSFCell Cell;
 //    private static XSSFRow Row;
     WebDriver driver;
@@ -31,6 +31,7 @@ public class DemoSiteTest {
     String url = "http://thedemosite.co.uk ";
     ExtentReports report;
     ExtentTest test;
+    private
 
 
 //  @BeforeClass
@@ -41,6 +42,21 @@ public class DemoSiteTest {
 //  }
     @BeforeTest
     public void setUp(){
+        XSSFWorkbook ExcelWBook = new XSSFWorkbook();
+        XSSFSheet sheet = new ExcelWBook.createSheet("TestData");
+        Object[][]={
+            {" myusername", "mypassword", "browser", "emptycell"};
+            {"saywhat", "igotuboo", "chrome", ""}
+
+        }
+
+        o
+        o   chrome
+        o   empty cell
+        o   anotherusername
+        o   anotherpassword
+        o   firefox
+
         report = new ExtentReports("C:/Users/Admin/Desktop/AT12/AutoReport.html", true);
         test = report.startTest("Verify Add and Save User");
         System.setProperty("webDriver.chromeDriver", "C:/Users/Admin/Desktop/AT12/chromedriver.exe");
@@ -68,12 +84,15 @@ public class DemoSiteTest {
         driver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(2) > td:nth-child(2) > p > input[type=\'password\']")).sendKeys(password);
         Thread.sleep(1000);
         driver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > div > center > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > input[type=\'button\']")).click();
-//
-//        Assert.assertEquals("saywhat", username);
-//        Assert.assertEquals("igotuboo", password);
-//
-//        report.endTest(test);
-//        report.flush();
+
+        if(username.equals("saywhat") && password.equals("igotuboo")){
+            test.log(LogStatus.PASS, "Verify New User Added");
+        }else{
+            test.log(LogStatus.FAIL, "Verify No User Added");
+        }
+
+        report.endTest(test);
+        report.flush();
 
     }
 
@@ -94,11 +113,14 @@ public class DemoSiteTest {
         driver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > input[type=\"button\"]")).click();
         Thread.sleep(1000);
 
-//        Assert.assertEquals("saywhat", username);
-//        Assert.assertEquals("igotuboo", password);
-//
-//        report.endTest(test);
-//        report.flush();
+            if (username.equals("saywhat") && (password.equals("igotuboo"))){
+                test.log(LogStatus.PASS, "Verify User Login");
+        }else{
+                test.log(LogStatus.FAIL, "Verify User Login");
+            }
+
+        report.endTest(test);
+        report.flush();
 
 //        Alert alert = driver.switchTo().alert();
 //        String alertText = alert.getText();
@@ -123,8 +145,12 @@ public class DemoSiteTest {
         driver.findElement(By.cssSelector("body > table > tbody > tr > td.auto-style1 > form > div > center > table > tbody > tr > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > p > input[type=\"button\"]")).click();
         Thread.sleep(2000);
 
-        Assert.assertEquals("Godsblessing", username);
-        Assert.assertEquals("IsdaBest", password);
+        if(username.equals("Godsblessing") && password.equals("IsdaBest")){
+            test.log(LogStatus.FAIL, "Verify no New User Added");
+        }
+
+//        Assert.assertEquals("Godsblessing", username);
+//        Assert.assertEquals("IsdaBest", password);
 
         report.endTest(test);
         report.flush();
